@@ -125,5 +125,5 @@ dmypy.json
 .pyre/
 
 # Auth
-.twitter_credentials.py
-.config.py
+twitter_credentials.py
+config.py
