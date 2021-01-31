@@ -1,0 +1,90 @@
+<!DOCTYPEhtml>
+<html>
+<head>
+  <title>@font-face</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="retro.css">
+</head>
+
+  <Container style=" background-color:black; paddingLeft: 0; border: 0; margin: 0;  width: 100000px">
+    <body style="background-color: #1A2025">
+      <Jumbotron style="background-color: #1A2025; width:1445px; height:1200px">
+        <img src="./images/WallStreetBets.png" alt="" style="display: block;margin-left: auto;margin-right: auto;width: 44%;height: 20%;background-color: #1A2025;"/>
+        <div style="color:#F4D5FF;float: right; margin-left: 100px">
+          <br/>
+          <h1 data-text="TRENDING STOCKS">TRENDING STOCKS<br/></h1>
+          <div id="piechart" style="background-color: black; color: red"></div>
+          <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+          <script type="text/javascript">
+          // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+          // Draw the chart and set the chart values
+            function drawChart() {
+              var data=[];
+              //var json=require("./data.json");
+              data.push(['Ticker','Frequency']);
+              //data.push(['$GME',3]);
+              fetch("data.json")
+                .then(response => response.json())
+                .then(json => {
+                  console.log(json);
+                  const inputdata= json.watchlist;
+                  inputdata.forEach((element) => {
+                    data.push([element.ticker,element.frequency]);
+                  });
+                })
+                setTimeout(() => { console.log('waiting')
+              var data2 = google.visualization.arrayToDataTable(data);
+              console.log(data2)
+            // Optional; add a title and set the width and height of the chart
+              var options = {titleTextStyle:{'color':'#F4D5FF'}, 'paddingTop':0, 'paddingLeft':1000, 'margin-left':0, 'width':600, 'height':700,'backgroundColor':"#1A2025", 'color':'white'};
+
+            // Display the chart inside the <div> element with id="piechart"
+              var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+              chart.draw(data2, options);
+            }, 200);
+          }
+          </script>
+        </div>
+
+
+        <div style="color:#F4D5FF; float:right; margin-right: 100px">
+          <!--<h1 data-text="Trending Stocks"> Over on the right<br/></h1>-->
+
+
+          <!--<canvas id="canvas" width="400" height="400" color="white"></canvas>-->
+        </div>
+
+        <div>
+          <div>
+
+          </div>
+          <div style="width:1000px; color:#F4D5FF; margin-left: 100px">
+            <h1 data-text="LIVE FEED" style="width:1000px">LIVE FEED</h1>
+            <div style="width: 45%">
+              <a style="margin-left: 500px; margin-right: auto; width:15%;" class="twitter-timeline" href="https://twitter.com/wsbmod?ref_src=twsrc%5Etfw">Tweets by wsbmod</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+            </div>
+            <script type="text/javascript">
+              function printTweets() {
+                const request = async () => {
+                  const response = await fetch("tweets.json");
+                  const json = await response.json();
+                  console.log(json);
+                }
+              }
+            </script>
+            This is a post from reddit and this thing can go on and on and on and on and onand on and on and on and on and on and on and on and on and on
+          </div>
+
+        </div>
+      </Jumbotron>
+    </body>
+  </Container>
+</html>
+
+<!--     -->

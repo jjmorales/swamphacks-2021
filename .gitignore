@@ -123,3 +123,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Auth
+.twitter_credentials.py
+.config.py
